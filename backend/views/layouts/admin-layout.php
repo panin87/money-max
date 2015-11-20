@@ -6,6 +6,7 @@
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Url;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
@@ -25,8 +26,8 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
 
-<div class="wrap">
-    
+<div class="wrap white">
+
   <?php
   echo $this->render('partials\_sidebar.php',array('content' => $content));
     NavBar::begin([
@@ -46,9 +47,15 @@ AppAsset::register($this);
             'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']];
-        $menuItems[] = ['label' => 'User','url' => ['/user/index']];
-        $menuItems[] = ['label' => 'Categories','url' => ['/categories/index']];
-    }
+      }
+      $menuItems[] = [
+          'label' => Yii::t('app', 'Language'),
+          'items' => [
+            ['label' => 'English', 'url' => Url::current(['lang' => 'en']),'active' => (Yii::$app->language == 'en_US')],
+            ['label' => 'Հայերեն',  'url' => Url::current(['lang' => 'am']),'active' => (Yii::$app->language == 'hy_HY')],
+            ['label' => 'Rусский', 'url' => Url::current(['lang' => 'ru']),'active' => (Yii::$app->language == 'ru_RU')],
+            ],
+          ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
@@ -57,8 +64,8 @@ AppAsset::register($this);
     ?>
 
 </div>
-    
-        
+
+
 
 
 <footer class="footer">

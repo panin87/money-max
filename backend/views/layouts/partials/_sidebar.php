@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\helpers\Url;
 ?>
 
 <div id="wrapper">
@@ -11,23 +12,17 @@ use common\widgets\Alert;
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="<?php echo Yii::$app->request->baseUrl.'\index.php?r=categories/index';?>"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
+                <li class="<?= Yii::$app->controller->id == 'items' ? 'active' : '';?>">
+                  <a href="<?php echo Url::to(['items/index'],true); ?>"><i class="fa fa-fw fa-dashboard"></i> <?php echo Yii::t('app','Items');?></a>
                 </li>
-                <li>
-                    <a href="<?php echo Yii::$app->request->baseUrl .'\index.php?r=user/index'?>"><i class="fa fa-fw fa-bar-chart-o"></i> Users</a>
+                <li  class="<?= Yii::$app->controller->id == 'user' ? 'active' : '';?>">
+                    <a href="<?php echo Url::to(['user/index'],true); ?>"><i class="fa fa-fw fa-bar-chart-o"></i><?php echo Yii::t('app','Users');?>  </a>
                 </li>
-                <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                <li  class="<?= Yii::$app->controller->id == 'trips' ? 'active' : '';?>">
+                    <a href="<?php echo Url::to(['trips/index'],true); ?>"><i class="fa fa-fw fa-bar-chart-o"></i><?php echo Yii::t('app','Trips');?></a>
                 </li>
-                <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                </li>
-                <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                </li>
-                <li>
-                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                <li  class="<?= Yii::$app->controller->id == 'price' ? 'active' : '';?>">
+                    <a href="<?php echo Url::to(['price/index'],true); ?>"><i class="fa fa-fw fa-bar-chart-o"></i> <?php echo Yii::t('app','Prices');?></a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -40,17 +35,11 @@ use common\widgets\Alert;
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                </li>
-                <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </nav>
-    <div class="container">
+    <div class="container white">
         <?=
         Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -59,4 +48,4 @@ use common\widgets\Alert;
 <?= Alert::widget() ?>
 <?= $content ?>
     </div>
-</div>  
+</div>
